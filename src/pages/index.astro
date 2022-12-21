@@ -4,6 +4,7 @@ import Footer from '../components/footer.astro';
 import Timeline from '../components/timeline.astro';
 import Skills from '../components/skills.astro';
 import Resume from '../components/resume.astro';
+import Menu from '../components/menu.astro';
 
 ---
 <html lang="en">
@@ -15,12 +16,26 @@ import Resume from '../components/resume.astro';
         <title>Astro</title>
   </head>
   <body>
-    <div class="container">
-      <Skills />
-      <Timeline />
-      <Resume />
+    <div id="Home" class="container">
+      <Menu/>
+      <section id="About">
+        <Skills/>
+        <Timeline />
+        <Resume />
+      </section>
       <Social />
       <Footer />
     </div>
   </body>
 </html>
+
+<style>
+  :global(html) {
+        scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+  }
+  </style>
