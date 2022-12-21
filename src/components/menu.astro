@@ -1,5 +1,4 @@
 ---
-
 ---
 <nav class="bg-gray-50 sm:px-24 py-2 fixed w-full z-20 top-0 left-0 drop-shadow-md">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
@@ -48,7 +47,7 @@ const spyScrolling = ( ) => {
     window.onscroll = () => {
         const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
         for ( let s in sections )
-            if ( sections.hasOwnProperty(s) && sections[s].offsetTop <= scrollPos ) {
+            if (sections.hasOwnProperty(s) && sections[s].offsetTop <= scrollPos) {
                 const id = sections[s].id;
                 document.querySelector('.text-rose-600').classList.remove('text-gray-900', 'bg-rose-100', 'text-rose-600');
                 document.querySelector(`a[href*=${id}]`).classList.add('text-rose-600', 'bg-rose-100');

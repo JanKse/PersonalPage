@@ -5,6 +5,7 @@ import Timeline from '../components/timeline.astro';
 import Skills from '../components/skills.astro';
 import Resume from '../components/resume.astro';
 import Menu from '../components/menu.astro';
+import Contact from '../components/contact.astro';
 
 ---
 <html lang="en">
@@ -15,17 +16,22 @@ import Menu from '../components/menu.astro';
         <meta name="generator" content = {Astro.generator} >
         <title>Astro</title>
   </head>
-  <body>
-    <div id="Home" class="container">
+  <body class="container">
       <Menu/>
+      <section id="Home">
+
+      </section>
       <section id="About">
         <Skills/>
         <Timeline />
         <Resume />
       </section>
-      <Social />
+      <section id="Contact" class="px-24 bg-gray-50 py-8">
+        <h2 class="text-4xl font-medium text-gray-900">Contact and social media</h2>
+        <Contact />
+        <Social />
+      </section>
       <Footer />
-    </div>
   </body>
 </html>
 
