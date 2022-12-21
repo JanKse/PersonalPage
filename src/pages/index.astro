@@ -6,6 +6,7 @@ import Skills from '../components/skills.astro';
 import Resume from '../components/resume.astro';
 import Menu from '../components/menu.astro';
 import Contact from '../components/contact.astro';
+import Header from '../components/header.astro';
 
 ---
 <html lang="en">
@@ -18,9 +19,9 @@ import Contact from '../components/contact.astro';
   </head>
   <body class="container">
       <Menu/>
-      <section id="Home">
-
-      </section>
+      <header id="Home" class="py-40 before bg-gray-50">
+        <Header/>
+      </header>
       <section id="About">
         <Skills/>
         <Timeline />
