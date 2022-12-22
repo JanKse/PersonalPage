@@ -62,25 +62,6 @@ class Collapse {
     }
 }
 
-window.Collapse = Collapse;
 
-export function initCollapses() {
-    document
-        .querySelectorAll("[data-collapse-toggle]")
-        .forEach((triggerEl) => {
-            const targetEl = document.getElementById(
-                triggerEl.getAttribute("data-collapse-toggle")
-            );
-
-            // check if the target element exists
-            if (!targetEl) {
-                return;
-            }
-
-            new Collapse(targetEl, {
-                triggerEl,
-            });
-        });
-}
 
 export default Collapse;
