@@ -45,7 +45,6 @@
 
   //click outside of navigation
   document.addEventListener('click', e => { 
-    e.preventDefault();  
     if (!navigation.contains(e.target)){
       collapse.collapse();
     }});
