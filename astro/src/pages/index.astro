@@ -15,7 +15,16 @@ import Header from '../components/header.astro';
       <link/>
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content = {Astro.generator} >
-        <title>Astro</title>
+        <title>Jan Ksenak space</title>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNQCVE32DP"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-JNQCVE32DP');
+        </script>
   </head>
   <body>
       <Menu/>
@@ -46,3 +55,4 @@ import Header from '../components/header.astro';
     }
   }
   </style>
+  <!-- Google tag (gtag.js) -->
