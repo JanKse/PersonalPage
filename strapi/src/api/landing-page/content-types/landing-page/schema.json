@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "TitleBio": {
+    "TitleBio1": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -43,7 +43,7 @@
       "type": "string",
       "required": true
     },
-    "TitleITSkillListSub": {
+    "SubtitleITSkillList": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -52,7 +52,16 @@
       "type": "string",
       "required": true
     },
-    "TitleAutomationSkillListSub": {
+    "SubtitleAutomationSkillList": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "TitleBio2": {
       "pluginOptions": {
         "i18n": {
           "localized": true

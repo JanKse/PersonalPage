@@ -1,9 +1,27 @@
 ---
+import axios from 'axios';
+import {bgColorList, getRandomItem} from '../scripts/index'
+const {TitleBio1, TitleBio2, TitleGreeting} = Astro.props;
+
+
+
+let IAmList = []
+
+await axios.get('http://127.0.0.1:1337/api/i-am-lists')
+    .then(function (response) {
+      //handle success
+      IAmList = response.data.data
+    })
+    .catch(function (error) {
+      //handle error
+    })
+
+ //Make a request for a user with a given ID
 
 ---
 <header>
     <div class="font-bold text-center flex items-center justify-center text-gray-900">
-        <h1 class="text-7xl mr-8">Hello </h1>
+        <h1 class="text-7xl mr-8">{TitleGreeting} </h1>
         <svg xmlns="http://www.w3.org/2000/svg" class="inline lg:w-20 lg:h-20 w-16 h-16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M11 11.5v-1a1.5 1.5 0 0 1 3 0v1.5"></path>
@@ -13,15 +31,13 @@
          </svg>
     </div>
     <div class="text-center my-4 text-gray-900">
-        <span class="block md:text-4xl text-2xl">My name is Jan and this is my page, so welcome !</span>
-        <span class="block md:text-3xl text-xl  font-medium">I am a ...</span>
+        <span class="block md:text-4xl text-2xl">{TitleBio1}</span>
+        <span class="block md:text-3xl text-xl  font-medium">{TitleBio2}</span>
     </div>
     <div class="flex flex-row justify-center flex-wrap lg:px-64">
-        <span class="bg-amber-100 text-amber-800 md:text-m text-sm font-medium md:mr-2 md:mb-2 mr-1.5 mb-1.5 md:px-4 px-2 py-1 rounded ">BUT Student</span>
-        <span class="bg-teal-100 text-teal-800 md:text-m text-sm font-medium md:mr-2 md:mb-2 mr-1.5 mb-1.5 md:px-4 px-2 py-1 rounded">Technology enthusiast</span>
-        <span class="bg-lime-100 text-lime-800 md:text-m text-sm font-medium md:mr-2 md:mb-2 mr-1.5 mb-1.5 md:px-4 px-2 py-1 rounded">Automation engineer</span>
-        <span class="bg-cyan-100 text-cyan-800 md:text-m text-sm font-medium md:mr-2 md:mb-2 mr-1.5 mb-1.5 md:px-4 px-2 py-1 rounded">Book lover</span>
-        <span class="bg-rose-100 text-rose-800 md:text-m text-sm font-medium md:mr-2 md:mb-2 mr-1.5 mb-1.5 md:px-4 px-2 py-1 rounded">Investor todler</span>
+        {IAmList.map((item) => (
+            <span class:list={[getRandomItem(bgColorList),'md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item.attributes.Item}</li>
+          ))}
     </div>
 </header>
 

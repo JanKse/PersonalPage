@@ -7,28 +7,21 @@ import Resume from '../components/resume.astro';
 import Menu from '../components/menu.astro';
 import Contact from '../components/contact.astro';
 import Header from '../components/header.astro';
+import axios from 'axios';
 
+let LandingPageData = {}
 
-import axios from 'axios'
-
-
- //Make a request for a user with a given ID
-axios.get('http://127.0.0.1:1337/api/landing-page')
-  .then(function (response) {
-     //handle success
-    console.log(response.data);
-  })
-  .catch(function (error) {
-     //handle error
-    console.log(error);
-  })
-  .then(function () {
-     //always executed
-  });
-
-
+await axios.get('http://127.0.0.1:1337/api/landing-page')
+    .then(function (response) {
+      //handle success
+      LandingPageData = response.data.data.attributes
+    })
+    .catch(function (error) {
+      //handle error
+    })
 
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -49,10 +42,10 @@ axios.get('http://127.0.0.1:1337/api/landing-page')
   <body>
       <Menu/>
       <section id="Home" class="lg:pt-40 lg:pb-20 pt-32 pb-10 lg:px-24 md:px-20 sm:px-16 px-12  bg-gray-50">
-          <Header/>
+          <Header TitleBio1={LandingPageData.TitleBio1} TitleBio2={LandingPageData.TitleBio2}TitleGreeting={LandingPageData.TitleGreeting}/>
       </section>
       <section id="About" class="">
-        <Skills/>
+        <Skills SkillTitle={LandingPageData.SkillTitle} SubtitleITSkillList={LandingPageData.SubtitleITSkillList} SubtitleAutomationSkillList={LandingPageData.SubtitleAutomationSkillList}/>
         <Timeline />
         <Resume />
       </section>
