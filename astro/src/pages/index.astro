@@ -8,6 +8,26 @@ import Menu from '../components/menu.astro';
 import Contact from '../components/contact.astro';
 import Header from '../components/header.astro';
 
+
+import axios from 'axios'
+
+
+ //Make a request for a user with a given ID
+axios.get('http://127.0.0.1:1337/api/landing-page')
+  .then(function (response) {
+     //handle success
+    console.log(response.data);
+  })
+  .catch(function (error) {
+     //handle error
+    console.log(error);
+  })
+  .then(function () {
+     //always executed
+  });
+
+
+
 ---
 <html lang="en">
   <head>
