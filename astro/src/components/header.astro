@@ -1,13 +1,13 @@
 ---
 import axios from 'axios';
-import {bgColorList, getRandomItem} from '../scripts/index'
+import {bgColorList, getRandomItem, hostURL} from '../scripts/index'
 const {TitleBio1, TitleBio2, TitleGreeting} = Astro.props;
 
 
 
 let IAmList = []
 
-await axios.get('http://127.0.0.1:1337/api/i-am-lists')
+await axios.get(hostURL + 'api/i-am-lists')
     .then(function (response) {
       //handle success
       IAmList = response.data.data

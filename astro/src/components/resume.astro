@@ -1,11 +1,11 @@
 ---
 import axios from 'axios';
 const {TitleResume} = Astro.props;
+import { hostURL } from '../scripts';
 
 let resume = {}
 
-await axios.get('http://127.0.0.1:1337/api/upload/files/1'
-)
+await axios.get(hostURL + 'api/upload/files/1')
     .then(function (response) {
       //handle success
       resume = response.data

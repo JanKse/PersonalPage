@@ -1,5 +1,8 @@
 ---
 import axios from 'axios';
+import { hostURL } from '../scripts';
+
+
 const {TitleTimeline, SubtitleTimeline1, SubtitleTimeline2} = Astro.props;
 
 
@@ -7,7 +10,7 @@ let timeline = []
 const workType = 'Work'
 const universityType = 'University'
 
-await axios.get('http://127.0.0.1:1337/api/timelines'
+await axios.get(hostURL + 'api/timelines'
 )
     .then(function (response) {
       //handle success

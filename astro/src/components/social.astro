@@ -1,9 +1,10 @@
 ---
 import axios from 'axios';
+import { hostURL } from '../scripts';
 
 let socialNetworks = {}
 
-await axios.get('http://127.0.0.1:1337/api/social-network?populate=*'
+await axios.get(hostURL + 'api/social-network?populate=*'
 )
     .then(function (response) {
       //handle success

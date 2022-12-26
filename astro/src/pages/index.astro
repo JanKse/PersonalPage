@@ -8,17 +8,18 @@ import Menu from '../components/menu.astro';
 import Contact from '../components/contact.astro';
 import Header from '../components/header.astro';
 import axios from 'axios';
+import { hostURL } from '../scripts';
 
-let LandingPageData = {}
+let LandingPageData = {};
 
-await axios.get('http://127.0.0.1:1337/api/landing-page')
+await axios.get(hostURL + 'api/landing-page')
     .then(function (response) {
       //handle success
       LandingPageData = response.data.data.attributes
     })
     .catch(function (error) {
       //handle error
-    })
+    });
 
 ---
 
