@@ -1,6 +1,7 @@
 ---
-
+const {TitleContact, Email, SKTelNumber, CZTelNumber, SKAddress, CZAddress} = Astro.props;
 ---
+<h2 class="md:text-4xl md:text-left text-3xl text-center font-medium text-gray-900">{TitleContact}</h2>
 <div class="grid lg:grid-cols-3 sm:grid-cols-2 md:grid-flow-row place-content-evenly md:py-8 py-4 bg-gray-50">
     <div class="flex flex-row items-center hover:bg-gray-100 py-2 px-6 rounded-lg">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="text-gray-900 md:w-12 md:h-12 w-8 h-8" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -8,7 +9,7 @@
             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
             <polyline points="3 7 12 13 21 7"></polyline>
          </svg>
-         <span class="block pl-4 md:text-lg text-md font-medium text-gray-900">jan.ksenak@gmail.com</span>
+         <span class="block pl-4 md:text-lg text-md font-medium text-gray-900">{Email}</span>
     </div>
     <div class="flex flex-row items-center hover:bg-gray-100 py-2 px-6 rounded-lg">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="text-gray-900 md:w-12 md:h-12 w-8 h-8" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -17,10 +18,10 @@
          </svg>
          <div>
             <span class="block pl-4 md:text-lg text-md font-medium text-gray-900">
-                +421 911 224 038
+                {SKTelNumber}
              </span>
              <span class="block pl-4 md:text-lg text-md font-medium text-gray-900">
-                +420 608 240 547
+                {CZTelNumber}
              </span>
          </div>
     </div>
@@ -34,10 +35,10 @@
          </svg>
          <div>
             <span class="block pl-4 md:md:text-lg text-md text-md font-medium text-gray-900">
-                SR, Stará Ľubovňa
+                {SKAddress}
              </span>
              <span class="block pl-4 md:text-lg text-md font-medium text-gray-900">
-                ČR, Brno - Královo Pole
+                {CZAddress}
              </span>
          </div>
     </div>

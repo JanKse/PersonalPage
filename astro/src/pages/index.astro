@@ -46,15 +46,14 @@ await axios.get('http://127.0.0.1:1337/api/landing-page')
       </section>
       <section id="About" class="">
         <Skills SkillTitle={LandingPageData.SkillTitle} SubtitleITSkillList={LandingPageData.SubtitleITSkillList} SubtitleAutomationSkillList={LandingPageData.SubtitleAutomationSkillList}/>
-        <Timeline />
-        <Resume />
+        <Timeline TitleTimeline={LandingPageData.TitleTimeline} SubtitleTimeline1={LandingPageData.SubtitleTimeline1} SubtitleTimeline2={LandingPageData.SubtitleTimeline2}/>
+        <Resume TitleResume={LandingPageData.TitleResume}/>
       </section>
       <section id="Contact" class="lg:px-24 md:px-20 sm:px-16 px-12 bg-gray-50 md:py-8 py-4">
-        <h2 class="md:text-4xl md:text-left text-3xl text-center font-medium text-gray-900">Contact and social media</h2>
-        <Contact />
+        <Contact TitleContact={LandingPageData.TitleContact} Email={LandingPageData.Email} SKTelNumber={LandingPageData.SKTelNumber} CZTelNumber={LandingPageData.CZTelNumber} SKAddress={LandingPageData.SKAddress} CZAddress={LandingPageData.CZAddress}     />
         <Social />
       </section>
-      <Footer />
+      <Footer FooterDescription={LandingPageData.FooterDescription}/>
   </body>
 </html>
 

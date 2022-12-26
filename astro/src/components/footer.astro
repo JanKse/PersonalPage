@@ -1,6 +1,9 @@
 ---
+const {FooterDescription} = Astro.props
+
 
 ---
 <footer class="bg-gray-50 py-2 text-center"> 
-    <span class="text-sm text-gray-500">Created by Jan Ksenak © 2022. Powered by Astro.</span>
+    <span class="text-sm text-gray-500" set:html={FooterDescription}></span> 
+        
 </footer> 

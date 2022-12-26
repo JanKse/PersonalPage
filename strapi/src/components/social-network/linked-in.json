@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_social_network_linked_ins",
+  "info": {
+    "displayName": "Social network",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "URL": {
+      "type": "string",
+      "required": true
+    },
+    "ScreenReaderDesc": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
