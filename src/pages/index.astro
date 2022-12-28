@@ -7,20 +7,45 @@ import Resume from '../components/resume.astro';
 import Menu from '../components/menu.astro';
 import Contact from '../components/contact.astro';
 import Header from '../components/header.astro';
-import axios from 'axios';
-import { hostURL } from '../scripts';
+import { contentfulClient } from "../lib/contentful";
+import type { LandingPage } from "../lib/contentful";
 
-let LandingPageData = {};
+const landingPage = await contentfulClient.getEntries<LandingPage>({
+  content_type: "landingPage"
+});
 
-await axios.get(hostURL + 'api/landing-page')
-    .then(function (response) {
-      //handle success
-      LandingPageData = response.data.data.attributes
-    })
-    .catch(function (error) {
-      //handle error
-    });
+const landingPageData = landingPage.items.map((item) => {
+  const { greetingsTitle, bio1title, bio2title, iAmList, skillsTitle, skillsSubtitle1, skillsSubtitle2, automationSkillList,
+     itSkillList, timelineTitle, timeline1subtitle, timeline2subtitle, resumeTitle, contactTitle, email, skTelNumber,
+     czTelNumber, skAddress, czAddress, footerContent, resume
+    
+    }  = item.fields;
+  return {
+    greetingsTitle,
+    bio1title,
+    bio2title,
+    iAmList,
+    skillsTitle,
+    skillsSubtitle1,
+    skillsSubtitle2,
+    automationSkillList,
+    itSkillList,
+    timelineTitle,
+    timeline1subtitle,
+    timeline2subtitle,
+    resumeTitle,
+    contactTitle,
+    email,
+    skTelNumber,
+    czTelNumber,
+    skAddress,
+    czAddress,
+    footerContent,
+    resume,
+  };
+})[0];
 
+console.log(landingPageData.resume.fields.file.url)
 ---
 
 <html lang="en">
@@ -43,18 +68,18 @@ await axios.get(hostURL + 'api/landing-page')
   <body>
       <Menu/>
       <section id="Home" class="lg:pt-40 lg:pb-20 pt-32 pb-10 lg:px-24 md:px-20 sm:px-16 px-12  bg-gray-50">
-          <Header TitleBio1={LandingPageData.TitleBio1} TitleBio2={LandingPageData.TitleBio2}TitleGreeting={LandingPageData.TitleGreeting}/>
+          <Header IAmList={landingPageData.iAmList} TitleBio1={landingPageData.bio1title} TitleBio2={landingPageData.bio2title}TitleGreeting={landingPageData.greetingsTitle}/>
       </section>
       <section id="About" class="">
-        <Skills SkillTitle={LandingPageData.SkillTitle} SubtitleITSkillList={LandingPageData.SubtitleITSkillList} SubtitleAutomationSkillList={LandingPageData.SubtitleAutomationSkillList}/>
-        <Timeline TitleTimeline={LandingPageData.TitleTimeline} SubtitleTimeline1={LandingPageData.SubtitleTimeline1} SubtitleTimeline2={LandingPageData.SubtitleTimeline2}/>
-        <Resume TitleResume={LandingPageData.TitleResume}/>
+        <Skills AutomationSkillList={landingPageData.automationSkillList} ITSkillList={landingPageData.itSkillList}  SkillTitle={landingPageData.skillsTitle} SubtitleITSkillList={landingPageData.skillsSubtitle1} SubtitleAutomationSkillList={landingPageData.skillsSubtitle2}/>
+        <Timeline TitleTimeline={landingPageData.timelineTitle} SubtitleTimeline1={landingPageData.timeline1subtitle} SubtitleTimeline2={landingPageData.timeline2subtitle}/>
+        <Resume ResumeUrl={'https'+ landingPageData.resume.fields.file.url} TitleResume={landingPageData.resumeTitle}/>
       </section>
       <section id="Contact" class="lg:px-24 md:px-20 sm:px-16 px-12 bg-gray-50 md:py-8 py-4">
-        <Contact TitleContact={LandingPageData.TitleContact} Email={LandingPageData.Email} SKTelNumber={LandingPageData.SKTelNumber} CZTelNumber={LandingPageData.CZTelNumber} SKAddress={LandingPageData.SKAddress} CZAddress={LandingPageData.CZAddress}     />
+        <Contact TitleContact={landingPageData.contactTitle} Email={landingPageData.email} SKTelNumber={landingPageData.skTelNumber} CZTelNumber={landingPageData.czTelNumber} SKAddress={landingPageData.skAddress} CZAddress={landingPageData.czAddress}     />
         <Social />
       </section>
-      <Footer FooterDescription={LandingPageData.FooterDescription}/>
+      <Footer FooterDescription={landingPageData.footerContent}/>
   </body>
 </html>
 

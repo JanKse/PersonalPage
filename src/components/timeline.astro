@@ -1,25 +1,30 @@
 ---
-import axios from 'axios';
-import { hostURL } from '../scripts';
+
+import { contentfulClient } from "../lib/contentful";
+import type { Timeline } from "../lib/contentful";
 
 
 const {TitleTimeline, SubtitleTimeline1, SubtitleTimeline2} = Astro.props;
-
-
-let timeline = []
 const workType = 'Work'
 const universityType = 'University'
 
-await axios.get(hostURL + 'api/timelines'
-)
-    .then(function (response) {
-      //handle success
-      timeline = response.data.data
-    })
-    .catch(function (error) {
-      //handle error
-    })
+const entries = await contentfulClient.getEntries<Timeline>({
+  content_type: "timelineITem"
+});
 
+const timelineItems = entries.items.map((item) => {
+  const { title, years, description, isCurrent, type } = item.fields;
+  return {
+    title,
+    years,
+    description,
+    isCurrent,
+    type
+    
+  };
+});
+
+timelineItems.reverse()
 ---
 
 <div class="py-8 lg:px-24 md:px-20 sm:px-16 px-12 bg-gray-50">
@@ -29,8 +34,8 @@ await axios.get(hostURL + 'api/timelines'
             <h2 class="text-2xl font-semibold text-gray-900 mb-4 -ml-6">{SubtitleTimeline1}</h2>
             <ol class="relative border-l border-gray-200 dark:border-gray-700">
             { 
-            timeline.map((timelineItem) => 
-                timelineItem.attributes.Type == workType &&
+            timelineItems.map((timelineItem) => 
+                timelineItem.type == workType &&
                     <li class="mb-10 ml-12">           
                         <span class="flex absolute -left-6 justify-center items-center w-12 h-12 bg-rose-100 rounded-full ring-8 ring-white ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="w-8 h-8 text-rose-500 " stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -41,11 +46,11 @@ await axios.get(hostURL + 'api/timelines'
                                 <path d="M3 13a20 20 0 0 0 18 0"></path>
                             </svg>
                         </span>
-                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">{timelineItem.attributes.Title}  
-                            {timelineItem.attributes.Current && <span class="self-start md:self-center bg-rose-200 text-rose-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Current</span>}
+                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">{timelineItem.title}  
+                            {timelineItem.isCurrent && <span class="self-start md:self-center bg-rose-200 text-rose-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Current</span>}
                         </h3> 
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{timelineItem.attributes.Years}</time>
-                        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{timelineItem.attributes.Description}</p>
+                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{timelineItem.years}</time>
+                        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{timelineItem.description}</p>
                     </li>
             )}
             </ol>
@@ -54,8 +59,8 @@ await axios.get(hostURL + 'api/timelines'
         <h2 class="text-2xl font-semibold text-gray-900 mb-4 -ml-6">{SubtitleTimeline2}</h2>
         <ol class="relative border-l border-gray-200 dark:border-gray-700">
             { 
-            timeline.map((timelineItem) => 
-                timelineItem.attributes.Type == universityType &&
+            timelineItems.map((timelineItem) => 
+                timelineItem.type == universityType &&
                     <li class="mb-10 ml-12">           
                         <span class="flex absolute -left-6 justify-center items-center w-12 h-12 bg-sky-100 rounded-full ring-8 ring-white ">
                             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8 text-sky-500 " viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -64,11 +69,11 @@ await axios.get(hostURL + 'api/timelines'
                             <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"></path>
                         </svg>
                         </span>
-                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">{timelineItem.attributes.Title}  
-                             {timelineItem.attributes.Current && <span class="self-start md:self-center bg-sky-200 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Current</span>}
+                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">{timelineItem.title}  
+                             {timelineItem.isCurrent && <span class="self-start md:self-center bg-sky-200 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Current</span>}
                         </h3> 
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{timelineItem.attributes.Years}</time>
-                        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{timelineItem.attributes.Description}</p>
+                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{timelineItem.years}</time>
+                        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{timelineItem.description}</p>
                     </li>
                 )}
         </ol>

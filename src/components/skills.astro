@@ -2,29 +2,8 @@
 
 import {bgColorList, getRandomItem, hostURL} from '../scripts/index'
 import axios from 'axios';
-const {SkillTitle, SubtitleITSkillList, SubtitleAutomationSkillList} = Astro.props;
+const {SkillTitle, SubtitleITSkillList, SubtitleAutomationSkillList, AutomationSkillList, ITSkillList} = Astro.props;
 
-let AutomationSkillList = []
-let ITSkillList = []
-
-await axios.get(hostURL + 'api/automation-skills-lists')
-    .then(function (response) {
-      //handle success
-      AutomationSkillList = response.data.data
-    })
-    .catch(function (error) {
-      //handle error
-    })
-    
-
-await axios.get('http://127.0.0.1:1337/api/it-skill-lists')
-    .then(function (response) {
-      //handle success
-      ITSkillList = response.data.data
-    })
-    .catch(function (error) {
-      //handle error
-    })
 ---
 <div class="py-8 flex xl:flex-nowrap flex-wrap xl:space-x-16 lg:px-24 md:px-20 sm:px-16 px-12 bg-gray-100">
     <div class="">
@@ -33,13 +12,13 @@ await axios.get('http://127.0.0.1:1337/api/it-skill-lists')
     <div class="">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">{SubtitleAutomationSkillList}</h2>
         {AutomationSkillList.map((item) => (
-            <span class:list={[getRandomItem(bgColorList),'inline-block','md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item.attributes.Item}</li>
+            <span class:list={[getRandomItem(bgColorList),'inline-block','md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item}</li>
           ))}
     </div>
     <div class="">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">{SubtitleITSkillList}</h2>
         {ITSkillList.map((item) => (
-            <span class:list={[getRandomItem(bgColorList),'inline-block','md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item.attributes.Item}</li>
+            <span class:list={[getRandomItem(bgColorList),'inline-block','md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item}</li>
           ))}
     </div>
 </div>

@@ -1,23 +1,8 @@
 ---
-import axios from 'axios';
 import {bgColorList, getRandomItem, hostURL} from '../scripts/index'
-const {TitleBio1, TitleBio2, TitleGreeting} = Astro.props;
-
-
-
-let IAmList = []
-
-await axios.get(hostURL + 'api/i-am-lists')
-    .then(function (response) {
-      //handle success
-      IAmList = response.data.data
-    })
-    .catch(function (error) {
-      //handle error
-    })
+const {TitleBio1, TitleBio2, TitleGreeting, IAmList} = Astro.props;
 
  //Make a request for a user with a given ID
-
 ---
 <header>
     <div class="font-bold text-center flex items-center justify-center text-gray-900">
@@ -36,7 +21,7 @@ await axios.get(hostURL + 'api/i-am-lists')
     </div>
     <div class="flex flex-row justify-center flex-wrap lg:px-64">
         {IAmList.map((item) => (
-            <span class:list={[getRandomItem(bgColorList),'md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item.attributes.Item}</li>
+            <span class:list={[getRandomItem(bgColorList),'md:text-m','text-sm','font-medium','md:mr-2','md:mb-2','mr-1.5','mb-1.5','md:px-4','px-2','py-1','rounded']} >{item}</li>
           ))}
     </div>
 </header>
