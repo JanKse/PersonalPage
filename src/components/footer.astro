@@ -1,9 +1,10 @@
 ---
 const {FooterDescription} = Astro.props
-
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+console.log(documentToHtmlString(FooterDescription.content))
 
 ---
 <footer class="bg-gray-50 py-2 text-center"> 
-    <span class="text-sm text-gray-500" set:html={FooterDescription}></span> 
+    <span class="text-sm text-gray-500" set:html={documentToHtmlString(FooterDescription)}></span> 
         
 </footer> 
